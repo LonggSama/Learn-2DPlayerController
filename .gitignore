@@ -6,3 +6,7 @@ obj
 Library
 2D PlayerController.sln
 .vsconfig
+Packages
+ProjectSettings
+2DPlayerController.sln
+Assembly-CSharp.csproj
