@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class AnimController : MonoBehaviour
 {
-    [SerializeField] PlayerController _playerMovement;
+    //[SerializeField] PlayerController _playerMovement;
 
-    //[SerializeField] Test _test;
+    public RigiRun RigiRun;
 
     private Animator _playerAC;
 
@@ -14,13 +15,13 @@ public class AnimController : MonoBehaviour
     void Awake()
     {
         _playerAC = GetComponent<Animator>();
-        _playerMovement = GetComponent<PlayerController>();
-        //_test = GetComponent<Test>();
+        //_playerMovement = GetComponent<PlayerController>();
+        RigiRun = GetComponent<RigiRun>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        _playerAC.SetFloat("Speed", Mathf.Abs(_playerMovement._velocity.x));
+        _playerAC.SetFloat("Speed", Mathf.Abs(RigiRun.RB.velocity.x));
     }
 }
