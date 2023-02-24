@@ -86,6 +86,7 @@ public class RigiRun : MonoBehaviour
         if (LastOnGroundTime > 0)
         {
             accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? Data.runAccelAmount : Data.runDecelAmount;
+            Debug.Log("AccelRate: " + accelRate);
         }
         else
         {
@@ -105,8 +106,6 @@ public class RigiRun : MonoBehaviour
         float speedDif = targetSpeed - RB.velocity.x;
         //Calculate force along x-axis to apply to the player
         float movement = speedDif * accelRate;
-        Debug.Log("Velocity: " + RB.velocity.x);
-        Debug.Log("Movement: " + movement);
         //Convert this to a vector and apply to rigidbody
         RB.AddForce(movement * Vector2.right, ForceMode2D.Force);
     }

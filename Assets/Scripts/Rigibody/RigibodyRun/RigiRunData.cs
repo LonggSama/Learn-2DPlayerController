@@ -19,12 +19,12 @@ public class RigiRunData : ScriptableObject
     private void OnValidate()
     {
         //Calculate are run acceleration & deceleration forces using formula: amount = ((1 / Time.fixedDeltaTime) * acceleration) / runMaxSpeed
-        runAccelAmount = ((1 / Time.fixedDeltaTime) * runAcceleration) / runMaxSpeed;
-        runDecelAmount = ((1 / Time.fixedDeltaTime)) * runDeceleration / runMaxSpeed;
+        runAccelAmount = (50 * runAcceleration) / runMaxSpeed;
+        runDecelAmount = (50 * runDeceleration) / runMaxSpeed;
 
         #region Variable Ranges
-        runAccelAmount = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
-        runDecelAmount = Mathf.Clamp(runDeceleration, 0.01f, runMaxSpeed);
+        runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
+        runDeceleration = Mathf.Clamp(runDeceleration, 0.01f, runMaxSpeed);
         #endregion
     }
 }
