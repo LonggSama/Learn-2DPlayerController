@@ -12,33 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bed18296b53ac4283c9eaf0eb8d65d, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  gravityStrength: NaN
-  gravityScale: NaN
-  fallGravityMult: 0
-  maxFallSpeed: 0
-  fastFallGravityMult: 0
-  maxFastFallSpeed: 0
-  runMaxSpeed: 9
-  runAccel: 9
-  runAccelAmount: 78.28401
-  runDecel: 9
-  runDecelAmount: 78.28401
+  gravityStrength: -52
+  gravityScale: 1.7333333
+  fallGravityMult: 2
+  maxFallSpeed: 18
+  fastFallGravityMult: 1
+  maxFastFallSpeed: 20
+  runMaxSpeed: 9.5
+  runAccel: 9.5
+  runAccelAmount: 11.923542
+  runDecel: 9.5
+  runDecelAmount: 11.923542
   accelInAir: 1
   decelInAir: 1
-  doConserveMomentum: 1
-  jumpHeight: 0
-  jumpTimeToApex: 0
-  jumpForce: NaN
-  jumpCutGravityMult: 0
-  jumpHangGravityMult: 0
+  doConserveMomentum: 0
+  jumpHeight: 6.5
+  jumpTimeToApex: 0.5
+  jumpForce: 26
+  jumpCutGravityMult: 3.5
+  jumpHangGravityMult: 1
   jumpHangTimeThreshold: 0
-  jumpHangAccelerationMult: 0
-  jumpHangMaxSpeedMult: 0
-  wallJumpForce: {x: 0, y: 0}
-  wallJumpRunLerp: 0
-  wallJumpTime: 0
+  jumpHangAccelerationMult: 1
+  jumpHangMaxSpeedMult: 1
+  wallJumpForce: {x: 8.5, y: 8.5}
+  wallJumpRunLerp: 0.075
+  wallJumpTime: 0.3
   doTurnOnWallJump: 0
-  slideSpeed: 0
-  slideAccel: 0
-  coyoteTime: 0
-  jumpInputBufferTime: 0
+  slideSpeed: -12
+  slideAccel: 12
+  coyoteTime: 0.2
+  jumpInputBufferTime: 0.2

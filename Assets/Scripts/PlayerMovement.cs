@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerData Data;
 
-    #region Variables
+    #region VARIABLES
+
+    #region Components
     //Components
     public Rigidbody2D RB { get; private set; }
+    public PlayerAnimator AnimHandeler { get; private set; }
+    #endregion
 
     //Variables control the various actions the player can perform at any time.
     public bool IsFacingRight { get; private set; }
@@ -16,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsWallJumping { get; private set; }
     public bool IsSliding { get; private set; }
 
+    #region State Parameters
     //Timers (also all fields, could be private and a method returning a bool could be used)
     public float LastOnGroundTime { get; private set; }
     public float LastOnWallTime { get; private set; }
@@ -29,10 +36,14 @@ public class PlayerMovement : MonoBehaviour
     //Wall Jump
     private float _wallJumpStartTime;
     private int _lastWallJumpDir;
+    #endregion
 
+    #region Input Parameters
     private Vector2 _moveInput;
     public float LastPressJumpTime { get; private set; }
+    #endregion
 
+    #region Check Paramaters
     //Set all of these up in the inspector
     [Header("Checks")]
     [SerializeField] private Transform _groundCheckPoint;
@@ -42,14 +53,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _frontWallCheckPoint;
     [SerializeField] private Transform _backWallCheckPoint;
     [SerializeField] private Vector2 _wallCheckSize = new Vector2(0.5f, 1f);
+    #endregion
 
+    #region Layer & Tags
     [Header("Layers & Tags")]
     [SerializeField] private LayerMask _groundLayer;
+    #endregion
+
     #endregion
 
     private void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
+        AnimHandeler = GetComponent<PlayerAnimator>();
     }
 
     private void Start()
@@ -72,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
 
         #region INPUT HANDLER
         _moveInput.x = Input.GetAxisRaw("Horizontal");
-        _moveInput.y = Input.GetAxisRaw("Verical");
+        _moveInput.y = Input.GetAxisRaw("Vertical");
 
         if (_moveInput.x != 0)
         {
@@ -82,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             OnJumpInput();
+            Debug.Log("IsJumping " + IsJumping);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -96,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
             //Ground Check
             if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping) //checks if set box overlaps with ground
             {
+
                 LastOnGroundTime = Data.coyoteTime; //if so sets the lastGrounded to coyoteTime
             }
 
@@ -116,8 +134,8 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        #region JUMP CHEKS
-        if (IsJumping && RB.velocity.x < 0)
+        #region JUMP CHECKS
+        if (IsJumping && RB.velocity.y < 0)
         {
             IsJumping = false;
 
@@ -315,6 +333,7 @@ public class PlayerMovement : MonoBehaviour
     #region JUMP METHODS
     private void Jump()
     {
+        Debug.Log("Jump");
         //Ensures we can't call Jump multiple times from one press
         LastOnGroundTime = 0;
         LastPressJumpTime = 0;
