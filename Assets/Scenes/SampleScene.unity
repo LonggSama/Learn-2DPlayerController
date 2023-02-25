@@ -3739,8 +3739,7 @@ GameObject:
   - component: {fileID: 1406349215}
   - component: {fileID: 1406349219}
   - component: {fileID: 1406349218}
-  - component: {fileID: 1406349221}
-  - component: {fileID: 1406349222}
+  - component: {fileID: 1406349220}
   m_Layer: 6
   m_Name: Virtual Guy
   m_TagString: Player
@@ -3872,7 +3871,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0.008496761, y: -0.20816422}
   m_Size: {x: 1.3882513, y: 1.5836716}
   m_Direction: 0
---- !u!114 &1406349221
+--- !u!114 &1406349220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3881,28 +3880,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1406349213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a54de604bd7b86d4e83b7dbdf817bc09, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fc1ffcf5da46024c8a763f8d69ca02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 09d8d79698aafda4c9e02bec3af0478e, type: 2}
-  _groundCheckPoint: {fileID: 1406349214}
+  Data: {fileID: 11400000, guid: 43ab4cfd3dfa03b48ac4f40387fc672e, type: 2}
+  _groundCheckPoint: {fileID: 0}
   _groundCheckSize: {x: 0.49, y: 0.03}
+  _frontWallCheckPoint: {fileID: 0}
+  _backWallCheckPoint: {fileID: 0}
+  _wallCheckSize: {x: 0.5, y: 1}
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 128
---- !u!114 &1406349222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406349213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb9290a33d9a894492b951d596e6046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RigiRun: {fileID: 0}
+    m_Bits: 0
 --- !u!1 &1802623727
 GameObject:
   m_ObjectHideFlags: 0
