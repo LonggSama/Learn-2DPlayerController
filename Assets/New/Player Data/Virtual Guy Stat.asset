@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36258776e3584e34da60d4b26b91cc70, type: 3}
+  m_Name: Virtual Guy Stat
+  m_EditorClassIdentifier: 
+  gravityStrenght: -77.77777
+  gravityScale: 2.5925925
+  fallGravityMult: 2
+  maxFallSpeed: 18
+  fastFallGravityMult: 1
+  maxFastFallSpeed: 20
+  runMaxSpeed: 9
+  runAcceleration: 9
+  runAccelAmount: 50
+  runDecceleration: 9
+  runDecelAmount: 50
+  accelInAir: 1
+  decelInAir: 1
+  jumpHeight: 3.5
+  jumpTimeToApex: 0.3
+  jumpForce: 23.333332
+  jumpCutGravityMult: 3.5
+  jumpHangGravityMult: 1
+  jumpHangTimeThreshold: 0
+  jumpHangAccelerationMult: 1
+  jumpHangMaxSpeedMult: 1
+  coyoteTime: 0.2
+  jumpInputBufferTime: 0.2

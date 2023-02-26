@@ -4,9 +4,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementOld : MonoBehaviour
 {
-    public PlayerData Data;
+    public PlayerDataOld Data;
 
     #region VARIABLES
 
