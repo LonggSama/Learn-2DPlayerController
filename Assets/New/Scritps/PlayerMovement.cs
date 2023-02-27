@@ -16,28 +16,22 @@ public class PlayerMovement : MonoBehaviour
     #region VARIABLES
     public bool IsFacingRight { get; private set; }
     public bool IsJumping { get; private set; }
-    public bool IsWallJumping { get; private set; }
     #endregion
 
     #region STATE PARAMETERS
     //Timer
     public float LastOnGroundTime { get; private set; }
-    public float LastOnWallTime { get; private set; }
-    public float LastOnWallRightTime { get; private set; }
-    public float LastOnWallLeftTime { get; private set; }
 
     //Jump
     private bool _isJumpCut;
     private bool _isJumpFalling;
-
-    //Wall Jump
-    private float _wallJumpStartTime;
-    private int _lastWallJumpDir;
+    private int _bonusJumpLeft;
+    private int _jumpCount;
     #endregion
 
     #region INPUT PARAMETERS
-    private Vector2 _moveInput;
-    public float LastPressJumpTime { get; private set; }
+    public Vector2 _moveInput;
+    public float LastPressJumpTime;
     #endregion
 
     #region CHECK PARAMETERS
@@ -60,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         IsFacingRight = true;
+        _bonusJumpLeft = PlayerData.jumpBonus;
     }
 
     private void Update()
@@ -84,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
             OnJumpInput();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             OnJumpUpInput();
         }
@@ -97,6 +92,11 @@ public class PlayerMovement : MonoBehaviour
             if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _gorundLayer) && !IsJumping)
             {
                 LastOnGroundTime = PlayerData.coyoteTime;
+                _bonusJumpLeft = PlayerData.jumpBonus;
+
+                _jumpCount = 0;
+
+                AnimHandler.SetIsGrounded(true);
             }
         }
         #endregion
@@ -107,6 +107,9 @@ public class PlayerMovement : MonoBehaviour
             IsJumping = false;
 
             _isJumpFalling = true;
+
+            AnimHandler.SetIsJumping(false);
+            
         }
 
         if (LastOnGroundTime > 0 && !IsJumping)
@@ -122,7 +125,24 @@ public class PlayerMovement : MonoBehaviour
             IsJumping = true;
             _isJumpCut = false;
             _isJumpFalling = false;
+
             Jump();
+        }
+
+        //Double Jump
+        else if (LastPressJumpTime > 0 && _bonusJumpLeft > 0)
+        {
+            IsJumping = true;
+            _isJumpCut = false;
+            _isJumpFalling = false;
+
+            _bonusJumpLeft--;
+
+            _jumpCount++;
+
+            Jump();
+
+            AnimHandler.SetAnotherJump(_jumpCount);
         }
         #endregion
 
@@ -140,6 +160,10 @@ public class PlayerMovement : MonoBehaviour
             //Higher gravity if jump button released
             SetGravityScale(PlayerData.gravityScale * PlayerData.jumpCutGravityMult);
             PlayerRb.velocity = new Vector2(PlayerRb.velocity.x, Mathf.Max(PlayerRb.velocity.y, -PlayerData.maxFallSpeed));
+        }
+        else if ((IsJumping || _isJumpFalling) && Mathf.Abs(PlayerRb.velocity.y) < PlayerData.jumpHangTimeThreshold)
+        {
+            SetGravityScale(PlayerData.gravityScale * PlayerData.jumpHangGravityMult);
         }
         else if (PlayerRb.velocity.y < 0)
         {
@@ -216,8 +240,10 @@ public class PlayerMovement : MonoBehaviour
         //Convert this to a vector and apply to rigidbody
         PlayerRb.AddForce(movement * Vector2.right, ForceMode2D.Force);
 
+        AnimHandler.SetSpeed(Mathf.Abs(_moveInput.x));
+
         /*
-		 * For those interested here is what AddForce() will do
+		 * AddForce() will do
 		 * RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
 		 * Time.fixedDeltaTime is by default in Unity 0.02 seconds equal to 50 FixedUpdate() calls per second
 		*/
@@ -238,7 +264,6 @@ public class PlayerMovement : MonoBehaviour
     #region JUMP METHODS
     private void Jump()
     {
-        //Ensures we can't call Jump multiple times from one press
         LastOnGroundTime = 0;
         LastPressJumpTime = 0;
 
@@ -246,12 +271,16 @@ public class PlayerMovement : MonoBehaviour
         //We increase the force applied if we are falling
         //This means we'll always feel like we jump the same amount
         float force = PlayerData.jumpForce;
+
         if (PlayerRb.velocity.y < 0)
         {
             force -= PlayerRb.velocity.y;
         }
 
         PlayerRb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+
+        AnimHandler.SetIsJumping(true);
+        AnimHandler.SetIsGrounded(false);
         #endregion
     }
     #endregion
@@ -281,9 +310,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(_groundCheckPoint.position, _groundCheckSize);
-        Gizmos.color = Color.blue;
-        //Gizmos.DrawWireCube(_frontWallCheckPoint.position, _wallCheckSize);
-        //Gizmos.DrawWireCube(_backWallCheckPoint.position, _wallCheckSize);
     }
     #endregion
 }

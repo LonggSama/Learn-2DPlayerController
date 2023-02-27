@@ -42,15 +42,20 @@ public class PlayerData : ScriptableObject
 
     [Header("Both Jump")]
     public float jumpCutGravityMult;
-    [Range(0f, 1f)] public float jumpHangGravityMult;
+    [Range(0f, 3f)] public float jumpHangGravityMult;
     public float jumpHangTimeThreshold;
     [Space(1)]
     public float jumpHangAccelerationMult;
     public float jumpHangMaxSpeedMult;
 
+    [Space(5)]
+    public int jumpBonus;
+
     [Space(20)]
 
     #endregion
+
+
 
     #region ASSISTS
     [Header("Assists")]

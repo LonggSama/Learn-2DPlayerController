@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 60951829}
   - component: {fileID: 60951828}
   - component: {fileID: 60951827}
+  - component: {fileID: 60951830}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -172,6 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerData: {fileID: 11400000, guid: 02ed6ad920871024fb0d2f68a3c1b7e5, type: 2}
+  _moveInput: {x: 0, y: 0}
+  LastPressJumpTime: 0
   _groundCheckPoint: {fileID: 2130760054}
   _groundCheckSize: {x: 0.49, y: 0.03}
   _gorundLayer:
@@ -224,6 +227,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3774573, y: 1.4987829}
   m_EdgeRadius: 0
+--- !u!114 &60951830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60951825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231986288f29d094b816172dd3717e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &140808841
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +610,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1526038397}
     m_Modifications:
+    - target: {fileID: 2127597019, guid: 89b773082e43ddd47ba397cc00def910, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 60951827}
     - target: {fileID: 697399960710195761, guid: 89b773082e43ddd47ba397cc00def910, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -643,7 +662,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Virtual Guy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2127597019, guid: 89b773082e43ddd47ba397cc00def910, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 89b773082e43ddd47ba397cc00def910, type: 3}
 --- !u!1 &1526038396
 GameObject:

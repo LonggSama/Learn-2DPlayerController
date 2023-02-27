@@ -211,6 +211,10 @@ public class PlayerMovementOld : MonoBehaviour
             SetGravityScale(Data.gravityScale * Data.jumpCutGravityMult);
             RB.velocity = new Vector2(RB.velocity.x, Mathf.Max(RB.velocity.y, -Data.maxFallSpeed));
         }
+        else if ((IsJumping || IsWallJumping || _isJumpFalling) && Mathf.Abs(RB.velocity.y) < Data.jumpHangTimeThreshold)
+        {
+            SetGravityScale(Data.gravityScale * Data.jumpHangGravityMult);
+        }
         else if (RB.velocity.y < 0)
         {
             //Higher gravity if falling

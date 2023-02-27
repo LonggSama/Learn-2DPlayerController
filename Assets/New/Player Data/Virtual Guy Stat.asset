@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Virtual Guy Stat
   m_EditorClassIdentifier: 
   gravityStrenght: -77.77777
-  gravityScale: 2.5925925
+  gravityScale: 7.9284167
   fallGravityMult: 2
   maxFallSpeed: 18
   fastFallGravityMult: 1
@@ -28,10 +28,11 @@ MonoBehaviour:
   jumpHeight: 3.5
   jumpTimeToApex: 0.3
   jumpForce: 23.333332
-  jumpCutGravityMult: 3.5
+  jumpCutGravityMult: 3
   jumpHangGravityMult: 1
   jumpHangTimeThreshold: 0
   jumpHangAccelerationMult: 1
   jumpHangMaxSpeedMult: 1
+  jumpBonus: 1
   coyoteTime: 0.2
   jumpInputBufferTime: 0.2
