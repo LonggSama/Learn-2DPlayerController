@@ -151,7 +151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60951825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.36, y: -4.5, z: 0}
+  m_LocalPosition: {x: -14.36, y: 7.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -610,10 +610,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1526038397}
     m_Modifications:
-    - target: {fileID: 2127597019, guid: 89b773082e43ddd47ba397cc00def910, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 60951827}
     - target: {fileID: 697399960710195761, guid: 89b773082e43ddd47ba397cc00def910, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -662,8 +658,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Virtual Guy
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2127597019, guid: 89b773082e43ddd47ba397cc00def910, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89b773082e43ddd47ba397cc00def910, type: 3}
 --- !u!1 &1526038396
 GameObject:

@@ -7,36 +7,26 @@ public class PlayerAnimator : MonoBehaviour
     #region COMPONENTS
     private Animator anim;
     private SpriteRenderer sprite;
+    private PlayerMovement move;
+    #endregion
+
+    #region TRIGGERS
+    public bool isLanded { private get; set; }
+    public bool isDoubleJump { private get; set; }
     #endregion
 
     private void Awake()
     {
+        move = GetComponent<PlayerMovement>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         anim = sprite.GetComponent<Animator>();
     }
 
-    public void SetSpeed(float speed)
+    private void Update()
     {
-        anim.SetFloat("Speed", speed);
-    }
-
-    public void SetIsJumping(bool isJumping)
-    {
-        anim.SetBool("IsJumping", isJumping);
-    }
-
-    public void SetIsGrounded(bool isGrounded)
-    {
-        anim.SetBool("IsGrounded", isGrounded);
-    }
-
-    public void SetVelocity(float velocity)
-    {
-        anim.SetFloat("Velocity", velocity);
-    }
-
-    public void SetAnotherJump(int jumpCount)
-    {
-        anim.SetInteger("JumpCount", jumpCount);
+        anim.SetFloat("yVelocity", move.PlayerRb.velocity.y);
+        anim.SetFloat("Speed", Mathf.Abs(move.PlayerRb.velocity.x));
+        anim.SetBool("IsLanded", isLanded);
+        anim.SetBool("IsDoubleJump", isDoubleJump);
     }
 }

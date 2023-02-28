@@ -93,10 +93,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 LastOnGroundTime = PlayerData.coyoteTime;
                 _bonusJumpLeft = PlayerData.jumpBonus;
-
                 _jumpCount = 0;
-
-                AnimHandler.SetIsGrounded(true);
             }
         }
         #endregion
@@ -106,10 +103,7 @@ public class PlayerMovement : MonoBehaviour
         {
             IsJumping = false;
 
-            _isJumpFalling = true;
-
-            AnimHandler.SetIsJumping(false);
-            
+            _isJumpFalling = true;            
         }
 
         if (LastOnGroundTime > 0 && !IsJumping)
@@ -137,12 +131,8 @@ public class PlayerMovement : MonoBehaviour
             _isJumpFalling = false;
 
             _bonusJumpLeft--;
-
-            _jumpCount++;
-
+            
             Jump();
-
-            AnimHandler.SetAnotherJump(_jumpCount);
         }
         #endregion
 
@@ -177,6 +167,18 @@ public class PlayerMovement : MonoBehaviour
             //Default gravity if standing on a platform or moving upwards
             SetGravityScale(PlayerData.gravityScale);
         }
+        #endregion
+
+        #region ANIMATION CALL
+        if (LastOnGroundTime == PlayerData.coyoteTime)
+            AnimHandler.isLanded = true;
+        else
+            AnimHandler.isLanded = false;
+
+        if (_jumpCount > 1)
+            AnimHandler.isDoubleJump = true;
+        else
+            AnimHandler.isDoubleJump = false;
         #endregion
     }
 
@@ -240,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
         //Convert this to a vector and apply to rigidbody
         PlayerRb.AddForce(movement * Vector2.right, ForceMode2D.Force);
 
-        AnimHandler.SetSpeed(Mathf.Abs(_moveInput.x));
+        //AnimHandler.SetSpeed(Mathf.Abs(_moveInput.x));
 
         /*
 		 * AddForce() will do
@@ -277,10 +279,9 @@ public class PlayerMovement : MonoBehaviour
             force -= PlayerRb.velocity.y;
         }
 
-        PlayerRb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        _jumpCount++;
 
-        AnimHandler.SetIsJumping(true);
-        AnimHandler.SetIsGrounded(false);
+        PlayerRb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         #endregion
     }
     #endregion
