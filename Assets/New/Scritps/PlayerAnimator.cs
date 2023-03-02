@@ -10,11 +10,6 @@ public class PlayerAnimator : MonoBehaviour
     private PlayerMovement move;
     #endregion
 
-    #region TRIGGERS
-    public bool isLanded { private get; set; }
-    public bool isDoubleJump { private get; set; }
-    #endregion
-
     #region ANIMATION STATES
     string currentState;
     public const string PLAYER_IDLE = "idle";
@@ -33,19 +28,22 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        anim.SetFloat("yVelocity", move.PlayerRb.velocity.y);
-        anim.SetFloat("Speed", Mathf.Abs(move.PlayerRb.velocity.x));
-        anim.SetBool("IsLanded", isLanded);
-        anim.SetBool("IsDoubleJump", isDoubleJump);
-        CheckDoubleJump();
-    }
+        if (move.PlayerRb.velocity.x != 0 && move.LastOnGroundTime > 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP))
+            CheckAnimationState(PLAYER_RUN);
 
-    public void CheckDoubleJump()
-    {
-        if (isDoubleJump)
+        else if (move.PlayerRb.velocity.x == 0 && move.LastOnGroundTime > 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP))
+            CheckAnimationState(PLAYER_IDLE);
+
+        else if (move.PlayerRb.velocity.y > 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP) && move.LastOnGroundTime < 0)
+            CheckAnimationState(PLAYER_JUMP);
+
+        else if (move.PlayerRb.velocity.y < 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP) && move.LastOnGroundTime < 0)
+            CheckAnimationState(PLAYER_FALL);
+
+        if (move.IsDoubleJump)
         {
-            anim.Play("doubleJump", 0);
-            isDoubleJump = false;
+            CheckAnimationState(PLAYER_DOUBLEJUMP);
+            move.IsDoubleJump = false;
         }
     }
 

@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerData: {fileID: 11400000, guid: 02ed6ad920871024fb0d2f68a3c1b7e5, type: 2}
-  _moveInput: {x: 0, y: 0}
+  IsDoubleJump: 0
   LastPressJumpTime: 0
   _groundCheckPoint: {fileID: 2130760054}
   _groundCheckSize: {x: 0.49, y: 0.03}

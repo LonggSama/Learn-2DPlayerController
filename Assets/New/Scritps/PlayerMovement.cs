@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     #region VARIABLES
     public bool IsFacingRight { get; private set; }
     public bool IsJumping { get; private set; }
+    public bool IsDoubleJump;
     #endregion
 
     #region STATE PARAMETERS
@@ -30,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region INPUT PARAMETERS
-    public Vector2 _moveInput;
+    private Vector2 _moveInput;
     public float LastPressJumpTime;
     #endregion
 
@@ -127,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
         else if (LastPressJumpTime > 0 && _bonusJumpLeft > 0)
         {
             IsJumping = true;
+            IsDoubleJump = true;
             _isJumpCut = false;
             _isJumpFalling = false;
 
@@ -167,18 +169,6 @@ public class PlayerMovement : MonoBehaviour
             //Default gravity if standing on a platform or moving upwards
             SetGravityScale(PlayerData.gravityScale);
         }
-        #endregion
-
-        #region ANIMATION CALL
-        if (LastOnGroundTime == PlayerData.coyoteTime)
-            AnimHandler.isLanded = true;
-        else
-            AnimHandler.isLanded = false;
-
-        if (_jumpCount > 1)
-            AnimHandler.isDoubleJump = true;
-        else
-            AnimHandler.isDoubleJump = false;
         #endregion
     }
 
