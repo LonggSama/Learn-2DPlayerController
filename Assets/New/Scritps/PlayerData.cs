@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     #region GRAVITY
-    [HideInInspector] public float gravityStrenght;
+    [HideInInspector] public float gravityStrength;
     [HideInInspector] public float gravityScale;
     [Space(5)]
     public float fallGravityMult;
@@ -66,9 +66,9 @@ public class PlayerData : ScriptableObject
     private void OnValidate()
     {
         #region Gravity
-        gravityStrenght = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
-        gravityScale = gravityStrenght / Physics2D.gravity.y;
-        jumpForce = Mathf.Abs(gravityStrenght) * jumpTimeToApex;
+        gravityStrength = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
+        gravityScale = gravityStrength / Physics2D.gravity.y;
+        jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToApex;
         #endregion
 
         #region Acceleration
