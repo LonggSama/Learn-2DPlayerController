@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36258776e3584e34da60d4b26b91cc70, type: 3}
   m_Name: Virtual Guy Stat
   m_EditorClassIdentifier: 
-  gravityStrenght: -77.77777
+  gravityStrength: -77.77777
   gravityScale: 7.9284167
   fallGravityMult: 2
   maxFallSpeed: 18
   fastFallGravityMult: 1
   maxFastFallSpeed: 20
   runMaxSpeed: 9
-  runAcceleration: 9
-  runAccelAmount: 50
-  runDecceleration: 9
-  runDecelAmount: 50
+  runAcceleration: 4
+  runAccelAmount: 22.222223
+  runDecceleration: 7
+  runDecelAmount: 38.88889
   accelInAir: 1
   decelInAir: 1
   jumpHeight: 3.5

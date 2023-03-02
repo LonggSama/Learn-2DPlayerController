@@ -28,10 +28,10 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Update()
     {
-        if (move.PlayerRb.velocity.x != 0 && move.LastOnGroundTime > 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP))
+        if (Mathf.Abs(move.PlayerRb.velocity.x) > 0.1 && move.LastOnGroundTime > 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP))
             CheckAnimationState(PLAYER_RUN);
 
-        else if (move.PlayerRb.velocity.x == 0 && move.LastOnGroundTime > 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP))
+        else if (Mathf.Abs(move.PlayerRb.velocity.x) < 0.1 && move.LastOnGroundTime > 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP))
             CheckAnimationState(PLAYER_IDLE);
 
         else if (move.PlayerRb.velocity.y > 0 && !IsAnimationPlaying(anim, PLAYER_DOUBLEJUMP) && move.LastOnGroundTime < 0)

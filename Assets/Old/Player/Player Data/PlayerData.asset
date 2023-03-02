@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   gravityStrength: -52
-  gravityScale: 1.7333333
+  gravityScale: 5.3007135
   fallGravityMult: 2
   maxFallSpeed: 18
   fastFallGravityMult: 1
   maxFastFallSpeed: 20
-  runMaxSpeed: 9.5
-  runAccel: 9.5
-  runAccelAmount: 11.923542
-  runDecel: 9.5
-  runDecelAmount: 11.923542
+  runMaxSpeed: 9
+  runAccel: 1
+  runAccelAmount: 5.555556
+  runDecel: 1
+  runDecelAmount: 5.555556
   accelInAir: 1
   decelInAir: 1
   doConserveMomentum: 0
