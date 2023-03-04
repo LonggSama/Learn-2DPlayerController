@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public PlayerData PlayerData;
 
+    public ParticleSystem Dust;
+
     #region COMPONENTS
     public Rigidbody2D PlayerRb { get; private set; }
     public PlayerAnimator AnimHandler { get; private set; }
@@ -144,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Much higher gravity if holding down
             SetGravityScale(PlayerData.gravityScale * PlayerData.fastFallGravityMult);
+
             //Caps maximum fall speed, so when falling over large distances we don't accelerate to insanely high speeds
             PlayerRb.velocity = new Vector2(PlayerRb.velocity.x, Mathf.Max(PlayerRb.velocity.y, -PlayerData.maxFastFallSpeed));
         }
@@ -161,6 +164,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Higher gravity if falling
             SetGravityScale(PlayerData.gravityScale * PlayerData.fallGravityMult);
+
             //Caps maximum fall speed, so when falling over large distances we don't accelerate to insanely high speeds
             PlayerRb.velocity = new Vector2(PlayerRb.velocity.x, Mathf.Max(PlayerRb.velocity.y, -PlayerData.maxFallSpeed));
         }
@@ -168,6 +172,14 @@ public class PlayerMovement : MonoBehaviour
         {
             //Default gravity if standing on a platform or moving upwards
             SetGravityScale(PlayerData.gravityScale);
+        }
+        #endregion
+
+        #region CALL PARTICLES
+        if ((PlayerRb.velocity.x > 0.01 || PlayerRb.velocity.x < -0.01) && _moveInput.x != 0 && LastOnGroundTime > 0)
+        {
+            //Call Dust
+            CreateDust();
         }
         #endregion
     }
@@ -227,12 +239,12 @@ public class PlayerMovement : MonoBehaviour
         #region Perform Run
         //Calculate difference between current velocity and desired velocity
         float speedDif = targetSpeed - PlayerRb.velocity.x;
+
         //Calculate force along x-axis to apply to the player
         float movement = speedDif * accelRate;
+
         //Convert this to a vector and apply to rigidbody
         PlayerRb.AddForce(movement * Vector2.right, ForceMode2D.Force);
-
-        //AnimHandler.SetSpeed(Mathf.Abs(_moveInput.x));
 
         /*
 		 * AddForce() will do
@@ -271,6 +283,8 @@ public class PlayerMovement : MonoBehaviour
 
         _jumpCount++;
 
+        CreateDust();
+
         PlayerRb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         #endregion
     }
@@ -301,6 +315,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(_groundCheckPoint.position, _groundCheckSize);
+    }
+    #endregion
+
+    #region PARTICLES
+    private void CreateDust()
+    {
+        Dust.Play();
     }
     #endregion
 }
