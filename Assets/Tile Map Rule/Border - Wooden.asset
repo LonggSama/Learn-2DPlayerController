@@ -240,4 +240,5 @@ MonoBehaviour:
   alwaysConnect: 1
   tilesToConnect:
   - {fileID: 11400000, guid: f59d788e354a6d34e918d869cecca198, type: 2}
+  - {fileID: 11400000, guid: d74242f1b75e1f04bbd071e8039b7ab8, type: 2}
   checkSelf: 1
