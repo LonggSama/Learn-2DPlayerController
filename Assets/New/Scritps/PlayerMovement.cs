@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
 
     #region COMPONENTS
     public Rigidbody2D PlayerRb { get; private set; }
-    public PlayerAnimator AnimHandler { get; private set; }
     #endregion
 
     #region VARIABLES
@@ -51,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         PlayerRb = GetComponent<Rigidbody2D>();
-        AnimHandler = GetComponent<PlayerAnimator>();
     }
 
     private void Start()
